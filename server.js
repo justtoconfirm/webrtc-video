@@ -31,6 +31,12 @@ io.on('connection', socket => {
 	// Event to join the room called when user connects to a room and pass in ID of room and user
 	socket.on('join-room', (roomId, userId) => {
 
+		// Join the room to the current user
+		socket.join(roomId)
+		// Send message to the room and sent to all users in that room
+		socket.broadcast.to(roomId).emit('user-connected', userId)
+
+		console.log(roomId, userId)
 	})
 })
 
