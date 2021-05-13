@@ -26,5 +26,13 @@ app.get('/:room', (req, res) => {
 	res.render('room', { roomId: req.params.room })
 })
 
+// Connect to the application through Socket.io
+io.on('connection', socket => {
+	// Event to join the room called when user connects to a room and pass in ID of room and user
+	socket.on('join-room', (roomId, userId) => {
+
+	})
+})
+
 // Start server and listen on the specified port
 server.listen(3000)
