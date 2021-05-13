@@ -36,7 +36,13 @@ io.on('connection', socket => {
 		// Send message to the room and sent to all users in that room
 		socket.broadcast.to(roomId).emit('user-connected', userId)
 
-		console.log(roomId, userId)
+		// Run this function when a user disconnects to clear their video from chat
+		socket.on('disconnect', () => {
+			// Pass in the id of the user that disconnected
+			socket.broadcast.to(roomId).emit('user-disconnected', userId)
+		})
+		
+		//console.log(roomId, userId)
 	})
 })
 
